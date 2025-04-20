@@ -19,10 +19,10 @@ current_direction = "forward"
 
 
 pwm_left = machine.PWM(pwm_pin_left)
-pwm_left.freq(5000)
+pwm_left.freq(200)
 pwm_left.duty_u16(0)
 pwm_right = machine.PWM(pwm_pin_right)
-pwm_right.freq(5000)
+pwm_right.freq(200)
 pwm_right.duty_u16(0)
 
 speed_left = None
@@ -31,8 +31,8 @@ my_ip = None
 
 #stop to allow h-bridge relays to settle along with motion
 def momentary_stop():
-    pwm_left.duty_u16(0)
-    pwm_right.duty_u16(0)
+    pwm_left.duty_u16(65535)
+    pwm_right.duty_u16(65535)
     forward_pin_left.value(0)
     reverse_pin_left.value(0)
     forward_pin_right.value(0)
@@ -139,8 +139,8 @@ def handle_request(request):
         print("Setting speed left:", speed_left, "right:", speed_right)
         speed_left = max(0, min(255, speed_left))
         speed_right = max(0, min(255, speed_right))
-        pwm_left.duty_u16(int(speed_left * 257))  # Scale 0–255 to 0–65535
-        pwm_right.duty_u16(int(speed_right * 257))  # Scale 0–255 to 0–65535
+        pwm_left.duty_u16(65535-int(speed_left * 257))  # Scale 0–255 to 0–65535
+        pwm_right.duty_u16(65535-int(speed_right * 257))  # Scale 0–255 to 0–65535
         return f"Speed set to left: {speed_left}, right: {speed_right}"
     else:
         return "Invalid or missing speed"
