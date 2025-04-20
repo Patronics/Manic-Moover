@@ -77,6 +77,49 @@ def handle_request(request):
     else:
         html = """<!DOCTYPE html>
             <html>
+                <style>
+                  body {{
+                    font-family: Arial, sans-serif;
+                    text-align: center;
+                    background-color: #f0f0f0;
+                  }}
+
+                  h1 {{
+                    color: #333;
+                  }}
+
+                  table {{
+                    margin: 20px auto;
+                  }}
+
+                  button {{
+                    padding: 15px 25px;
+                    font-size: 16px;
+                    margin: 10px;
+                    border: none;
+                    border-radius: 8px;
+                    background-color: #4CAF50;
+                    color: white;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                    min-width: 100px;
+                  }}
+
+                  button:hover {{
+                    background-color: #45a049;
+                  }}
+
+                  #speedSlider {{
+                    width: 300px;
+                    margin: 20px;
+                  }}
+
+                  #speedDisplay {{
+                    font-size: 18px;
+                    font-weight: bold;
+                  }}
+                </style>
+
               <body>
                 <input type="range" min="0" max="255" value="0" id="speedSlider">
                 <span id="speedDisplay">0</span>
